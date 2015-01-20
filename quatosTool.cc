@@ -15,7 +15,7 @@
 
 using namespace Eigen;
 
-#define QUATOSTOOL_VERSION "141228.0"  // yymmdd.build
+#define QUATOSTOOL_VERSION "150118.0"  // yymmdd.build
 
 #define MAX_DEPTH	16
 #define DEG_TO_RAD (M_PI / 180.0f)
@@ -875,36 +875,35 @@ void quatosToolMatrixOutput(const char *mtrxName, _Matrix_Type_ &mtrx) {
 			return;
 		}
 		maxIdx = strcmp(mtrxName, "M") ? 4 : 3;  // "M" matrix has only 3 members
-			fprintf(outFP, "\n"); // blank line after "info" section
-		for (ii=0; ii < maxIdx; ii++) {  // loop over each control direction (T,P,R,Y)
-				switch (ii) {
+		fprintf(outFP, "\n"); // blank line after "info" section
+		for (ii=0; ii < maxIdx; ii++) {  // loop over each control direction (T,P,R,Y (Mt or PID) or R,P,Y (M))
+			switch (ii) {
 				case 0 :
-				fprintf(outFP, "[%s]\n", maxIdx == 4 ? "Throttle" : "MM_Pitch");
+					fprintf(outFP, "[%s]\n", maxIdx == 4 ? "Throttle" : "MM_Roll");
 					break;
 				case 1 :
-				fprintf(outFP, "[%s]\n", maxIdx == 4 ? "Roll" : "MM_Yaw");
+					fprintf(outFP, "[%s]\n", maxIdx == 4 ? "Roll" : "MM_Pitch");
 					break;
 				case 2 :
-				fprintf(outFP, "[%s]\n", maxIdx == 4 ? "Pitch" : "MM_Roll");
+					fprintf(outFP, "[%s]\n", maxIdx == 4 ? "Pitch" : "MM_Yaw");
 					break;
 				case 3 :
 					fprintf(outFP, "[Yaw]\n");
 					break;
-				}
-				for (i = 1; i <= NUM_PORTS; i++) {
-					val = 0.0f;
-					j = quatosToolFindPort(i);
+			}
+			for (i = 1; i <= NUM_PORTS; i++) {
+				val = 0.0f;
+				j = quatosToolFindPort(i);
 				if (j >= 0) {
 					if (maxIdx == 4) // "M" or "PID"
 						val = mtrx(j, ii);
 					else
 						val = mtrx(ii, j);
 				}
-
-					fprintf(outFP, "Motor%d=%g\n", i, round(val * 10000)/10000); // %g prints no trailing decimals when they're zero, unlike %f
-				}
-				fprintf(outFP, "\n"); // blank line ends section
+				fprintf(outFP, "Motor%d=%g\n", i, round(val * 10000)/10000); // %g prints no trailing decimals when they're zero, unlike %f
 			}
+			fprintf(outFP, "\n"); // blank line ends section
+		}
 	}
 	// output generated matrix and #defines for DEFAULT_MOT_PWRD params
 	else {
@@ -924,31 +923,31 @@ void quatosToolMatrixOutput(const char *mtrxName, _Matrix_Type_ &mtrx) {
 
 			// "Mt" and "PID" matrixes
 			if (strcmp(mtrxName, "M")) {
-			if (j >= 0) {
-					t = mtrx(j, 0);
-					r = mtrx(j, 1);
-					p = mtrx(j, 2);
-					y = mtrx(j, 3);
+				if (j >= 0) {
+						t = mtrx(j, 0);
+						r = mtrx(j, 1);
+						p = mtrx(j, 2);
+						y = mtrx(j, 3);
+				}
+				fprintf(outFP, "#define DEFAULT_MOT_PWRD_%02d_T\t%+f\n", i, t);
+				fprintf(outFP, "#define DEFAULT_MOT_PWRD_%02d_P\t%+f\n", i, p);
+				fprintf(outFP, "#define DEFAULT_MOT_PWRD_%02d_R\t%+f\n", i, r);
+				fprintf(outFP, "#define DEFAULT_MOT_PWRD_%02d_Y\t%+f\n", i, y);
 			}
-			fprintf(outFP, "#define DEFAULT_MOT_PWRD_%02d_T\t%+f\n", i, t);
-			fprintf(outFP, "#define DEFAULT_MOT_PWRD_%02d_P\t%+f\n", i, p);
-			fprintf(outFP, "#define DEFAULT_MOT_PWRD_%02d_R\t%+f\n", i, r);
-			fprintf(outFP, "#define DEFAULT_MOT_PWRD_%02d_Y\t%+f\n", i, y);
-		}
 			// "M" matrix
 			else {
-			if (j >= 0) {
-					r = mtrx(0, j);
-					p = mtrx(1, j);
-					y = mtrx(2, j);
-			}
-			fprintf(outFP, "#define DEFAULT_QUATOS_MM_P%02d\t%+f\n", i, p);
+				if (j >= 0) {
+						r = mtrx(0, j);
+						p = mtrx(1, j);
+						y = mtrx(2, j);
+				}
+				fprintf(outFP, "#define DEFAULT_QUATOS_MM_P%02d\t%+f\n", i, p);
 				fprintf(outFP, "#define DEFAULT_QUATOS_MM_R%02d\t%+f\n", i, r);
-			fprintf(outFP, "#define DEFAULT_QUATOS_MM_Y%02d\t%+f\n", i, y);
+				fprintf(outFP, "#define DEFAULT_QUATOS_MM_Y%02d\t%+f\n", i, y);
+			}
 		}
-	}
 		fprintf(outFP, "\n");
-		}
+	}
 }
 
 void quatosToolDbgCraftData(void) {
