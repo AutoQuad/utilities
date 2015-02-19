@@ -729,38 +729,42 @@ void quatosToolCalc(void) {
 	// calculate x/y coordinates for each motor
 	switch (quatosData.craftType) {
 		case CONFIG_QUAD_PLUS:
-			quatosData.frameX << 0.0, 1.0, 0.0, -1.0;
-			quatosData.frameY << 1.0, 0.0, -1.0, 0.0;
+			quatosData.frameX << 1.0, 0.0, -1.0, 0.0;
+			quatosData.frameY << 0.0, 1.0, 0.0, -1.0;
 			break;
 		case CONFIG_QUAD_X:
-			quatosData.frameX << -sqrt(2.0)/2.0, sqrt(2.0)/2.0, sqrt(2.0)/2.0, -sqrt(2.0)/2.0;
-			quatosData.frameY << sqrt(2.0)/2.0, sqrt(2.0)/2.0, -sqrt(2.0)/2.0, -sqrt(2.0)/2.0;
+			quatosData.frameX << sqrt(2.0)/2.0, sqrt(2.0)/2.0, -sqrt(2.0)/2.0, -sqrt(2.0)/2.0;
+			quatosData.frameY << -sqrt(2.0)/2.0, sqrt(2.0)/2.0, sqrt(2.0)/2.0, -sqrt(2.0)/2.0;
 			break;
 		case CONFIG_HEX_PLUS:
 			quatosData.frameX << 0.0,	sqrt(3.0)/2.0,	sqrt(3.0)/2.0,	0.0,	-sqrt(3.0)/2.0,	-sqrt(3.0)/2.0;
 			quatosData.frameY << 1.0,	0.5,		-0.5,		-1.0,	-0.5,		0.5;
+			quatosData.frameX << 1.0, 0.5, -0.5, -1, -0.5, 0.5;
+			quatosData.frameY << 0.0, sqrt(3)/2.0, sqrt(3.0)/2.0, 0.0, -sqrt(3.0)/2.0, -sqrt(3.0)/2.0;
 			break;
 		case CONFIG_HEX_X:
-			quatosData.frameX << -0.5,		0.5,		1.0,	0.5,		-0.5,		-1.0;
-			quatosData.frameY << sqrt(3.0)/2.0,	sqrt(3.0)/2.0,	0.0,	-sqrt(3.0)/2.0,	-sqrt(3.0)/2.0,	0.0;
+			quatosData.frameX << sqrt(3.0)/2.0,	sqrt(3.0)/2.0, 0.0, -sqrt(3.0)/2.0, -sqrt(3.0)/2.0,	0.0;
+			quatosData.frameY <<  -0.5,	0.5, 1.0, 0.5, -0.5, -1.0;
 			break;
 		case CONFIG_OCTO_PLUS:
-			quatosData.frameX << 0,	cosf(315 *DEG_TO_RAD),	1,	cosf(45 *DEG_TO_RAD),	0,	cosf(135 *DEG_TO_RAD),	-1,	cosf(225 *DEG_TO_RAD);
-			quatosData.frameY << 1,	cosf(45 *DEG_TO_RAD),	0,	cosf(135 *DEG_TO_RAD),	-1,	cosf(225 *DEG_TO_RAD),	0,	cosf(315 *DEG_TO_RAD);
+			quatosData.frameY << 0,	cosf(315 *DEG_TO_RAD),	1,	cosf(45 *DEG_TO_RAD),	0,	cosf(135 *DEG_TO_RAD),	-1,	cosf(225 *DEG_TO_RAD);
+			quatosData.frameX << 1,	cosf(45 *DEG_TO_RAD),	0,	cosf(135 *DEG_TO_RAD),	-1,	cosf(225 *DEG_TO_RAD),	0,	cosf(315 *DEG_TO_RAD);
 			break;
 		case CONFIG_OCTO_X:
-			quatosData.frameX << cosf(247.5 *DEG_TO_RAD),	cosf(292.5 *DEG_TO_RAD),	cosf(337.5 *DEG_TO_RAD),	cosf(22.5 *DEG_TO_RAD),
+			quatosData.frameY << cosf(247.5 *DEG_TO_RAD),	cosf(292.5 *DEG_TO_RAD),	cosf(337.5 *DEG_TO_RAD),	cosf(22.5 *DEG_TO_RAD),
 					     cosf(67.5 *DEG_TO_RAD),	cosf(112.5 *DEG_TO_RAD),	cosf(157.5 *DEG_TO_RAD),	cosf(202.5 *DEG_TO_RAD);
-			quatosData.frameY << cosf(337.5 *DEG_TO_RAD),	cosf(22.5 *DEG_TO_RAD),		cosf(67.5 *DEG_TO_RAD),		cosf(112.5 *DEG_TO_RAD),
+			quatosData.frameX << cosf(337.5 *DEG_TO_RAD),	cosf(22.5 *DEG_TO_RAD),		cosf(67.5 *DEG_TO_RAD),		cosf(112.5 *DEG_TO_RAD),
 					     cosf(157.5 *DEG_TO_RAD),	cosf(202.5 *DEG_TO_RAD),	cosf(247.5 *DEG_TO_RAD),	cosf(292.5 *DEG_TO_RAD);
 			break;
 	}
 
 	// calc GG offset & J matrix
-	quatosToolObjCalc();
+	quatosToolObjCalc();//Hope this is right!
 
-	quatosData.motorX = quatosData.frameX.transpose() * -1.0;
-	quatosData.motorY = quatosData.frameY.transpose() * +1.0;
+	//quatosData.motorX = quatosData.frameX.transpose() * -1.0;//-1 will be accounted for in MM creation!
+	//quatosData.motorY = quatosData.frameY.transpose() * +1.0;
+	quatosData.motorX = quatosData.frameX.transpose();
+	quatosData.motorY = quatosData.frameY.transpose();
 
 	if (quatosData.craftType != CONFIG_CUSTOM) {
 		quatosData.motorX *= quatosData.distMot;
@@ -781,9 +785,9 @@ std::cout << "quatosData.motorY: " << quatosData.motorY << std::endl;
 	B.resize(3, 1);
 
 	// Roll
-	A <<	quatosData.motorY,
+	A <<	quatosData.motorX,//Changed from Y!!
 		MatrixXd::Ones(1, quatosData.n),
-		quatosData.motorX;
+		-quatosData.motorY;
 	B <<	0,
 		0,
 		1;
@@ -792,9 +796,9 @@ std::cout << "quatosData.motorY: " << quatosData.motorY << std::endl;
 	quatosData.ROLL *= B;
 
 	// Pitch
-	A <<	quatosData.motorX,
+	A <<	-quatosData.motorY,
 		MatrixXd::Ones(1, quatosData.n),
-		quatosData.motorY;
+		quatosData.motorX;
 	B <<	0,
 		0,
 		1;
