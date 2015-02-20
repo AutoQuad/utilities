@@ -842,8 +842,8 @@ std::cout << "quatosData.motorY: " << quatosData.motorY << std::endl;
 
 	// M
 	quatosData.M.resize(3, quatosData.n);
-	quatosData.M <<	quatosData.motorX,
-			quatosData.motorY,
+	quatosData.M <<	-quatosData.motorY,
+			quatosData.motorX,
 			quatosData.propDir;
 
 	// Mt
