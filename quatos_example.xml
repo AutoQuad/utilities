@@ -88,10 +88,10 @@
 	</craft>
 	<craft id="quad_plus" config="custom" motors="4">
 		<geometry>
-			<motor rotation="+1" port="1">0,1</motor> 
-			<motor rotation="-1" port="2">1,0</motor> 
-			<motor rotation="+1" port="3">0,-1</motor> 
-			<motor rotation="-1" port="4">-1,0</motor> 
+			<motor rotation="+1" port="1">1,0</motor> //x axis runs from back to front, y axis runs from left to right.So front motor is 1,0
+			<motor rotation="-1" port="2">0,1</motor> //
+			<motor rotation="+1" port="3">-1,0</motor> 
+			<motor rotation="-1" port="4">0,-1</motor> 
 		</geometry>
 	</craft>
 	<craft id="octo_x" config="octo_x">
