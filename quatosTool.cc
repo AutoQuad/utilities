@@ -15,7 +15,7 @@
 
 using namespace Eigen;
 
-#define QUATOSTOOL_VERSION "150118.0"  // yymmdd.build
+#define QUATOSTOOL_VERSION "150224.0"  // yymmdd.build
 
 #define MAX_DEPTH	16
 #define DEG_TO_RAD (M_PI / 180.0f)
