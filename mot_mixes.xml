@@ -61,33 +61,33 @@
 	<!-- The YAW values on hexa_h come out wrong...  The other values are the same as for hex_x.  -->
 	<craft id="hexa_h" config="custom" motors="6" configId="12">
 		<geometry>
-			<motor rotation="+1" port="1">-0.57,1</motor> 
-			<motor rotation="-1" port="2">0.57,1</motor> 
-			<motor rotation="+1" port="3">0.57,0</motor> 
-			<motor rotation="-1" port="4">0.57,-1</motor> 
-			<motor rotation="+1" port="5">-0.57,-1</motor> 
-			<motor rotation="-1" port="6">-0.57,0</motor> 
+			<motor rotation="+1" port="1">1,-0.57</motor>//Note that x axis runs from back to front and y axis from left to right
+			<motor rotation="-1" port="2">1,0.57</motor> 
+			<motor rotation="+1" port="3">0,0.57</motor> 
+			<motor rotation="-1" port="4">-1,0.57</motor> 
+			<motor rotation="+1" port="5">-1,-0.57</motor> 
+			<motor rotation="-1" port="6">0,-0.57</motor> 
 		</geometry>
 	</craft>
 	
 	<!-- The generated Pitch values for Y6 are 50% too high... need to adjust the output manually. -->
 	<craft id="hexa_coax" config="custom" motors="6" configId="13">
 		<geometry>
-			<motor rotation="+1" port="1">-0.5,0.5</motor> 
-			<motor rotation="-1" port="2">-0.5,0.5</motor> 
+			<motor rotation="+1" port="1">0.5,-0.5</motor>//Note how x-y axis are defined above!
+			<motor rotation="-1" port="2">0.5,-0.5</motor> 
 			<motor rotation="+1" port="3">0.5,0.5</motor>  
 			<motor rotation="-1" port="4">0.5,0.5</motor> 
-			<motor rotation="-1" port="5">0,-1</motor>
-			<motor rotation="+1" port="6">0,-1</motor>
+			<motor rotation="-1" port="5">-1,0</motor>
+			<motor rotation="+1" port="6">-1,0</motor>
 		</geometry>
 	</craft>
 	<!-- "Reversed" Y6, with the single arm leading. -->
 	<craft id="hexa_coax_rev" config="custom" motors="6" configId="14">
 		<geometry>
-			<motor rotation="+1" port="1">0,1</motor>
-			<motor rotation="-1" port="2">0,1</motor>
-			<motor rotation="+1" port="3">0.5,-0.5</motor>  
-			<motor rotation="-1" port="4">0.5,-0.5</motor> 
+			<motor rotation="+1" port="1">1,0</motor>
+			<motor rotation="-1" port="2">1,0</motor>
+			<motor rotation="+1" port="3">-0.5,0.5</motor>  
+			<motor rotation="-1" port="4">-0.5,0.5</motor> 
 			<motor rotation="-1" port="5">-0.5,-0.5</motor> 
 			<motor rotation="+1" port="6">-0.5,-0.5</motor> 
 		</geometry>
@@ -121,24 +121,24 @@
 	</craft>
 	<craft id="octo_coax_plus" config="custom" motors="8" configId="32">
 		<geometry>
-			<motor rotation="+1" port="1">0,1</motor> 
-			<motor rotation="-1" port="2">0,1</motor> 
-			<motor rotation="-1" port="3">1,0</motor> 
-			<motor rotation="+1" port="4">1,0</motor> 
-			<motor rotation="+1" port="5">0,-1</motor> 
-			<motor rotation="-1" port="6">0,-1</motor> 
-			<motor rotation="-1" port="7">-1,0</motor> 
-			<motor rotation="+1" port="8">-1,0</motor> 
+			<motor rotation="+1" port="1">1,0</motor> 
+			<motor rotation="-1" port="2">1,0</motor> 
+			<motor rotation="-1" port="3">0,1</motor> 
+			<motor rotation="+1" port="4">0,1</motor> 
+			<motor rotation="+1" port="5">-1,0</motor> 
+			<motor rotation="-1" port="6">-1,0</motor> 
+			<motor rotation="-1" port="7">0,-1</motor> 
+			<motor rotation="+1" port="8">0,-1</motor> 
 		</geometry>
 	</craft>
 	<craft id="octo_coax_x" config="custom" motors="8" configId="33">
 		<geometry>
-			<motor rotation="+1" port="1">-1,1</motor> 
-			<motor rotation="-1" port="2">-1,1</motor> 
+			<motor rotation="+1" port="1">1,-1</motor> 
+			<motor rotation="-1" port="2">1,-1</motor> 
 			<motor rotation="-1" port="3">1,1</motor> 
 			<motor rotation="+1" port="4">1,1</motor> 
-			<motor rotation="+1" port="5">1,-1</motor> 
-			<motor rotation="-1" port="6">1,-1</motor> 
+			<motor rotation="+1" port="5">-1,1</motor> 
+			<motor rotation="-1" port="6">-1,1</motor> 
 			<motor rotation="-1" port="7">-1,-1</motor> 
 			<motor rotation="+1" port="8">-1,-1</motor> 
 		</geometry>
@@ -146,24 +146,24 @@
 	<!-- "colinear octo" meaning 4 arms, two motors per arm, one set of motors is half-way between center of 'copter and the outer set of motors -->
 	<craft id="octo_colin_plus" config="custom" motors="8" configId="34">
 		<geometry>
-			<motor rotation="+1" port="1">0,1</motor> 
-			<motor rotation="-1" port="2">0,0.5</motor> 
-			<motor rotation="+1" port="3">1,0</motor> 
-			<motor rotation="-1" port="4">0.5,0</motor> 
-			<motor rotation="+1" port="5">0,-1</motor> 
-			<motor rotation="-1" port="6">0,-0.5</motor> 
-			<motor rotation="+1" port="7">-1,0</motor> 
-			<motor rotation="-1" port="8">-0.5,0</motor> 
+			<motor rotation="+1" port="1">1,0</motor> 
+			<motor rotation="-1" port="2">0.5,0</motor> 
+			<motor rotation="+1" port="3">0,1</motor> 
+			<motor rotation="-1" port="4">0,0.5</motor> 
+			<motor rotation="+1" port="5">-1,0</motor> 
+			<motor rotation="-1" port="6">-0.5,0</motor> 
+			<motor rotation="+1" port="7">0,-1</motor> 
+			<motor rotation="-1" port="8">0,-0.5</motor> 
 		</geometry>
 	</craft>
 	<craft id="octo_colin_x" config="custom" motors="8" configId="35">
 		<geometry>
-			<motor rotation="+1" port="1">-1,1</motor> 
-			<motor rotation="-1" port="2">-0.5,0.5</motor> 
+			<motor rotation="+1" port="1">1,-1</motor> 
+			<motor rotation="-1" port="2">0.5,-0.5</motor> 
 			<motor rotation="+1" port="3">1,1</motor> 
 			<motor rotation="-1" port="4">0.5,0.5</motor> 
-			<motor rotation="+1" port="5">1,-1</motor> 
-			<motor rotation="-1" port="6">0.5,-0.5</motor> 
+			<motor rotation="+1" port="5">-1,1</motor> 
+			<motor rotation="-1" port="6">-0.5,0.5</motor> 
 			<motor rotation="+1" port="7">-1,-1</motor> 
 			<motor rotation="-1" port="8">-0.5,-0.5</motor> 
 		</geometry>
@@ -173,26 +173,26 @@
 	</craft> -->
 	<craft id="octo_square_plus" config="custom" motors="8" configId="37">
 		<geometry>
-			<motor rotation="+1" port="1">0,1</motor> 
+			<motor rotation="+1" port="1">1,0</motor> 
 			<motor rotation="-1" port="2">0.7,0.7</motor> 
-			<motor rotation="+1" port="3">1,0</motor> 
-			<motor rotation="-1" port="4">0.7,-0.7</motor> 
-			<motor rotation="+1" port="5">0,-1</motor> 
+			<motor rotation="+1" port="3">0,1</motor> 
+			<motor rotation="-1" port="4">-0.7,0.7</motor> 
+			<motor rotation="+1" port="5">-1,0</motor> 
 			<motor rotation="-1" port="6">-0.7,-0.7</motor> 
-			<motor rotation="+1" port="7">-1,0</motor> 
-			<motor rotation="-1" port="8">-0.7,0.7</motor> 
+			<motor rotation="+1" port="7">0,-1</motor> 
+			<motor rotation="-1" port="8">0.7,-0.7</motor> 
 		</geometry>
 	</craft>
 	<craft id="octo_square_x" config="custom" motors="8" configId="38">
 		<geometry>
-			<motor rotation="+1" port="1">-1,1</motor> 
-			<motor rotation="-1" port="2">0,1</motor> 
+			<motor rotation="+1" port="1">1,-1</motor> 
+			<motor rotation="-1" port="2">1,0</motor> 
 			<motor rotation="+1" port="3">1,1</motor> 
-			<motor rotation="-1" port="4">1,0</motor> 
-			<motor rotation="+1" port="5">1,-1</motor> 
-			<motor rotation="-1" port="6">0,-1</motor> 
+			<motor rotation="-1" port="4">0,1</motor> 
+			<motor rotation="+1" port="5">-1,1</motor> 
+			<motor rotation="-1" port="6">-1,0</motor> 
 			<motor rotation="+1" port="7">-1,-1</motor> 
-			<motor rotation="-1" port="8">-1,0</motor> 
+			<motor rotation="-1" port="8">0,-1</motor> 
 		</geometry>
 	</craft>
 	
