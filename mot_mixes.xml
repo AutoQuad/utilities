@@ -21,10 +21,10 @@
 	<!-- quads -->
 	<craft id="quad_plus" config="custom" motors="4" configId="4">
 		<geometry>
-			<motor rotation="+1" port="1">0,1</motor> 
-			<motor rotation="-1" port="2">1,0</motor> 
-			<motor rotation="+1" port="3">0,-1</motor> 
-			<motor rotation="-1" port="4">-1,0</motor> 
+			<motor rotation="+1" port="1">1,0</motor> 
+			<motor rotation="-1" port="2">0,1</motor> 
+			<motor rotation="+1" port="3">-1,0</motor> 
+			<motor rotation="-1" port="4">0,-1</motor> 
 		</geometry>
 	</craft>
 	<craft id="quad_x" config="quad_x" configId="5">
@@ -73,10 +73,10 @@
 	<!-- The generated Pitch values for Y6 are 50% too high... need to adjust the output manually. -->
 	<craft id="hexa_coax" config="custom" motors="6" configId="13">
 		<geometry>
-			<motor rotation="+1" port="1">0.5,-0.5</motor>//Note how x-y axis are defined above!
-			<motor rotation="-1" port="2">0.5,-0.5</motor> 
-			<motor rotation="+1" port="3">0.5,0.5</motor>  
-			<motor rotation="-1" port="4">0.5,0.5</motor> 
+			<motor rotation="+1" port="1">0.5,-sqrt(3)/2</motor>//Note how x-y axis are defined above!
+			<motor rotation="-1" port="2">0.5,-sqrt(3)/2</motor> 
+			<motor rotation="+1" port="3">0.5,sqrt(3)/2</motor>  
+			<motor rotation="-1" port="4">0.5,sqrt(3)/2</motor> 
 			<motor rotation="-1" port="5">-1,0</motor>
 			<motor rotation="+1" port="6">-1,0</motor>
 		</geometry>
@@ -86,10 +86,10 @@
 		<geometry>
 			<motor rotation="+1" port="1">1,0</motor>
 			<motor rotation="-1" port="2">1,0</motor>
-			<motor rotation="+1" port="3">-0.5,0.5</motor>  
-			<motor rotation="-1" port="4">-0.5,0.5</motor> 
-			<motor rotation="-1" port="5">-0.5,-0.5</motor> 
-			<motor rotation="+1" port="6">-0.5,-0.5</motor> 
+			<motor rotation="+1" port="3">-0.5,sqrt(3)/2</motor>  
+			<motor rotation="-1" port="4">-0.5,sqrt(3)/2</motor> 
+			<motor rotation="-1" port="5">-0.5,-sqrt(3)/2</motor> 
+			<motor rotation="+1" port="6">-0.5,-sqrt(3)/2</motor> 
 		</geometry>
 	</craft>
 	
