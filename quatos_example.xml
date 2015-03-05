@@ -88,10 +88,10 @@
 	</craft>
 	<craft id="quad_plus" config="custom" motors="4">
 		<geometry>
-			<motor rotation="+1" port="1">0,1</motor> 
-			<motor rotation="-1" port="2">1,0</motor> 
-			<motor rotation="+1" port="3">0,-1</motor> 
-			<motor rotation="-1" port="4">-1,0</motor> 
+			<motor rotation="+1" port="1">1,0</motor> //x axis runs from back to front, y axis runs from left to right.So front motor is 1,0
+			<motor rotation="-1" port="2">0,1</motor> //
+			<motor rotation="+1" port="3">-1,0</motor> 
+			<motor rotation="-1" port="4">0,-1</motor> 
 		</geometry>
 	</craft>
 	<craft id="octo_x" config="octo_x">
@@ -141,10 +141,10 @@
         <!-- example of a quad_plus entered with custom geometry -->
         <craft id="custom_craft" config="custom" motors="4">
                 <geometry>
-                        <motor port="1" rotation="+1"> 0.00, +0.235</motor>
-                        <motor port="2" rotation="-1">+0.235,  0.00</motor>
-                        <motor port="8" rotation="+1"> 0.00, -0.235</motor>
-                        <motor port="9" rotation="-1">-0.235,  0.00</motor>
+                        <motor port="1" rotation="+1"> +0.235, 0.0</motor>
+                        <motor port="2" rotation="-1">0.0,.235</motor>
+                        <motor port="8" rotation="+1"> -.235,0.0</motor>
+                        <motor port="9" rotation="-1">0.0,-.235</motor>
                 </geometry>
                 <distance>
                         <esc>0.117</esc>
