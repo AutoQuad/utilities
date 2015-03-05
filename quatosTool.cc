@@ -15,7 +15,7 @@
 
 using namespace Eigen;
 
-#define QUATOSTOOL_VERSION "150224.0"  // yymmdd.build
+#define QUATOSTOOL_VERSION "150304.0"  // yymmdd.build
 
 #define MAX_DEPTH	16
 #define DEG_TO_RAD (M_PI / 180.0f)
@@ -759,10 +759,8 @@ void quatosToolCalc(void) {
 	}
 
 	// calc GG offset & J matrix
-	quatosToolObjCalc();//Hope this is right!
+	quatosToolObjCalc();
 
-	//quatosData.motorX = quatosData.frameX.transpose() * -1.0;//-1 will be accounted for in MM creation!
-	//quatosData.motorY = quatosData.frameY.transpose() * +1.0;
 	quatosData.motorX = quatosData.frameX.transpose();
 	quatosData.motorY = quatosData.frameY.transpose();
 
@@ -785,7 +783,7 @@ std::cout << "quatosData.motorY: " << quatosData.motorY << std::endl;
 	B.resize(3, 1);
 
 	// Roll
-	A <<	quatosData.motorX,//Changed from Y!!
+	A <<	quatosData.motorX,
 		MatrixXd::Ones(1, quatosData.n),
 		-quatosData.motorY;
 	B <<	0,
@@ -1012,6 +1010,7 @@ int main(int argc, char **argv) {
 			fprintf(outFP, "%d,", (int)quatosData.ports(i));
 		fprintf(outFP, "\n");
 	}
+	fprintf(outFP, "Tool_Version=%s\n", QUATOSTOOL_VERSION);
 	fprintf(outFP, "Craft=%s\n", quatosData.craftId);
 	fprintf(outFP, "Motors=%d\n", quatosData.n);
 	fprintf(outFP, "Mass=%f Kg (%d objects)\n", quatosData.totalMass, quatosData.objectsCount);
